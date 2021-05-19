@@ -36,7 +36,7 @@ def start_chrome_driver():
     options.add_argument("--disable-gpu")
     options.add_argument('--no-sandbox')
     options.add_argument('--lang=ja-JP')
-    prefs = {"download.default_directory" : r"/vagrant/workspace/searchAdAndResult/"}
+    prefs = {"download.default_directory" : r"./searchAdAndResult/"}
     options.add_experimental_option("prefs",prefs)
     options.add_argument('--user-agent=' + user_agent[random.randrange(0, len(user_agent), 1)])
     driver_path = "/usr/local/bin/chromedriver"
@@ -262,18 +262,8 @@ stream_handler.setLevel(logging.DEBUG)
 handler_format = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 stream_handler.setFormatter(handler_format)
 logger.addHandler(stream_handler)
-fh = logging.FileHandler('/usr/local/searchAdAndResult/test.log')
+fh = logging.FileHandler('./searchAdAndResult/test.log')
 logger.addHandler(fh)
-
-driver = start_chrome_driver()
-
-driver.execute_cdp_cmd(
-    "Browser.grantPermissions",
-    {
-        "origin": "https://www.google.co.jp/",
-        "permissions": ["geolocation"]
-    },
-)
 
 nested_dict = {}
 nested_dict = lambda: defaultdict(nested_dict)
@@ -456,7 +446,7 @@ time.sleep(1)
 api_scope = ['https://www.googleapis.com/auth/spreadsheets',
             'https://www.googleapis.com/auth/drive']
 
-sheet_id = "1Vh0O_rnwZO1B_sav4lAKOKWafYYsJe85kQRV8PK0iIg"
+sheet_id = "********************************"
 
 sheet_names = ["債務整理", 
               "自己破産", 
@@ -482,7 +472,7 @@ sheet_names = ["債務整理",
               "アスベスト",
               "B型肝炎"]
 
-json_path = "/usr/local/searchAdAndResult/credential.json"
+json_path = "./searchAdAndResult/credential.json"
 
 credentials_path = os.path.join(os.path.expanduser('~'), 'path', 'to', json_path)
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_path, api_scope)
